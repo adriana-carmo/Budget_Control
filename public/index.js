@@ -1,3 +1,13 @@
+
+//register your service worker
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("service-worker.js").then(reg => {
+      console.log("Service Worker Registered", reg);
+    });
+  });
+};
+
 let transactions = [];
 let myChart;
 
@@ -121,11 +131,13 @@ function sendTransaction(isAdding) {
       "Content-Type": "application/json"
     }
   })
-  .then(response => {    
+  .then(response => { 
+    console.log("index.js - first then");   
     return response.json();
   })
   .then(data => {
     if (data.errors) {
+      console.log("index.js - second then");
       errorEl.textContent = "Missing Information";
     }
     else {
@@ -135,6 +147,7 @@ function sendTransaction(isAdding) {
     }
   })
   .catch(err => {
+    console.log("index.js - third then");
     // fetch failed, so save in indexed db
     saveRecord(transaction);
 

@@ -3,7 +3,7 @@ const logger = require("morgan");
 const mongoose = require("mongoose");
 const compression = require("compression");
 
-const PORT = 3100;
+const PORT = process.env.PORT || 3000;
 
 const app = express();
 
@@ -15,9 +15,13 @@ app.use(express.json());
 
 app.use(express.static("public"));
 
-mongoose.connect("mongodb://localhost/budget", {
-  useNewUrlParser: true,
-  useFindAndModify: false
+mongoose.connect(
+  process.env.MONGODB_URI || "mongodb://localhost/budget_db", {
+  
+  //process.env.MONGODB_URI || "mongodb+srv://Adriana-admin:Password1234@cluster0.2bfav.mongodb.net/budget_db?retryWrites=true&w=majorityuseNewUrlParser: true",{
+  useFindAndModify: false,
+  useUnifiedTopology: true,
+  useNewUrlParser: true
 });
 
 // routes
