@@ -18,7 +18,6 @@ app.use(express.static("public"));
 mongoose.connect(
   process.env.MONGODB_URI || "mongodb://localhost/budget_db", {
   
-  //process.env.MONGODB_URI || "mongodb+srv://Adriana-admin:Password1234@cluster0.2bfav.mongodb.net/budget_db?retryWrites=true&w=majorityuseNewUrlParser: true",{
   useFindAndModify: false,
   useUnifiedTopology: true,
   useNewUrlParser: true
